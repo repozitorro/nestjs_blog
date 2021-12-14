@@ -5,7 +5,7 @@ export class CreateArticleDto {
   readonly title: string;
 
   @IsNotEmpty()
-  readonly descriptions: string;
+  readonly description: string;
 
   @IsNotEmpty()
   readonly body: string;
