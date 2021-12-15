@@ -37,7 +37,7 @@ export class ArticleService {
       const author = await this.userRepository.findOne({
         username: query.author,
       });
-      queryBuilder.andWhere('article.authorId = :id', {
+      queryBuilder.andWhere('articles.authorId = :id', {
         id: author.id,
       });
     }
