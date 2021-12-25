@@ -8,6 +8,7 @@ import { ArticleResponseInterface } from './types/articleResponse.interface';
 import slugify from 'slugify';
 import { ArticlesResponseInterface } from './types/articlesResponse.interface';
 import { FollowEntity } from '../profile/follow.entity';
+import { TagEntity } from '../tag/tag.entity';
 
 @Injectable()
 export class ArticleService {
@@ -18,6 +19,8 @@ export class ArticleService {
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(FollowEntity)
     private readonly followRepository: Repository<FollowEntity>,
+    @InjectRepository(TagEntity)
+    private readonly tagRepository: Repository<TagEntity>,
   ) {}
 
   async findAll(
@@ -137,6 +140,15 @@ export class ArticleService {
 
     article.author = currentUser;
 
+    if (article.tagList.length !== 0) {
+      for (const tag of article.tagList) {
+        const findTag = await this.tagRepository.findOne({ name: tag });
+        if (!findTag) {
+          await this.tagRepository.save({ name: tag });
+        }
+      }
+    }
+
     return await this.articleRepository.save(article);
   }
 
@@ -170,6 +182,15 @@ export class ArticleService {
     }
 
     Object.assign(article, updateArticleDto);
+
+    if (article.tagList.length !== 0) {
+      for (const tag of article.tagList) {
+        const findTag = await this.tagRepository.findOne({ name: tag });
+        if (!findTag) {
+          await this.tagRepository.save({ name: tag });
+        }
+      }
+    }
 
     return await this.articleRepository.save(article);
   }
