@@ -4,9 +4,9 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const config: ConnectionOptions = {
-  type: 'mysql',
+  type: 'postgres',
   host: process.env.DB_HOST,
-  port: 3306,
+  port: 5432,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
@@ -15,6 +15,9 @@ const config: ConnectionOptions = {
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
   cli: {
     migrationsDir: 'src/migrations',
+  },
+  ssl: {
+    rejectUnauthorized: false,
   },
 };
 

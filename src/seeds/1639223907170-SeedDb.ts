@@ -11,16 +11,7 @@ export class SeedDb1639223907170 implements MigrationInterface {
       `INSERT INTO users (username, email, password) VALUES ('admin', 'admin@gmail.com', '$2b$10$VOIJM32/JHOrRzzFPYlxT.EscKetuBlLAFcGNZA8S4Wu0sZ6CaDAO')`,
     );
     await queryRunner.query(
-      `INSERT INTO articles (slug, title, description, body, tagList, authorId) VALUES ('first-article', 'First article', 'First article desc', 'First article body', 'coffee,dragons', 1)`,
-    );
-    await queryRunner.query(
-      `INSERT INTO articles (slug, title, description, body, tagList, authorId) VALUES ('second-article', 'second article', 'second article desc', 'second article body', 'second,dagon', 1)`,
-    );
-    await queryRunner.query(
-      `INSERT INTO articles (slug, title, description, body, tagList, authorId) VALUES ('second-article24234', 'second article', 'second article desc', 'second article body', 'second,dagon', 1)`,
-    );
-    await queryRunner.query(
-      `INSERT INTO articles (slug, title, description, body, tagList, authorId) VALUES ('second-article2wrew34', 'second article', 'second article desc', 'second article body', 'second,dagon', 1)`,
+      `INSERT INTO articles (slug, title, description, body, "tagList", "authorId") VALUES ('first-article', 'First article', 'First article desc', 'First article body', 'coffee,dragons', 1)`,
     );
   }
 
